@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Productos({ producto }) {
+
   return (
     <div class="card" style={{ width: '18rem' }}>
         <img src={producto.image} class="card-img-top" alt="..." />
@@ -12,6 +13,7 @@ function Productos({ producto }) {
         <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
     </div>
+    
   )
 }
 
