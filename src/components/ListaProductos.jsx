@@ -14,22 +14,21 @@ function ListaProductos() {
     setLoading(true);
     setError(null);
 
-    // Construir URL según la categoría
-    let url = 'https://fakestoreapi.com/products'; // URL base fake API
+    let url = 'https://dummyjson.com/products/'; 
 
     if (idCategoria && idCategoria !== 'all') {
-      url = `https://fakestoreapi.com/products/category/${idCategoria}`;
+      url = `https://dummyjson.com/products/category/${idCategoria}`;
     }
 
     axios.get(url)
-      .then(response => {
-        setProductos(response.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setLoading(false);
-      });
+    .then(response => {
+      setProductos(response.data.products);
+      setLoading(false);
+    })
+    .catch(error => {
+      setError(error.message);
+      setLoading(false);
+    });
 
   }, [idCategoria]);
 
@@ -39,7 +38,7 @@ function ListaProductos() {
   return (
     <>
       <div>
-        <h1>Productos de la categoría: {idCategoria}</h1>
+        <h1><strong>{idCategoria}</strong></h1>
       </div>    
       <div className="container my-4">
         <div className="row g-4">

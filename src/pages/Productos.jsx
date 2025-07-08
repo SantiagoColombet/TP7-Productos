@@ -18,7 +18,6 @@ function Productos() {
 
   return (
     <div className='container'>
-      <h1>Productos</h1>
       <ListaProductos listaProductos={listaProductos} />
     </div>
   )
