@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/SantiagoColombet/TP7-Productos.git",
+  "homepage": "https://SantiagoColombet.github.io/TP7-Productos",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
