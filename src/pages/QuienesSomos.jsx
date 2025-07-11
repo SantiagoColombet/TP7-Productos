@@ -14,7 +14,7 @@ function QuienesSomos() {
               </div>
               <h4 className="mb-2">Oficina</h4>
               <hr className="w-50 mb-3 border-dark-subtle" />
-              <address className="m-0 text-secondary">Gurruchaga 400, Villa Crespo, Buenos Aires, Argentina</address>
+              <address className="m-0 text-secondary">José Bonifacio 1800, Caballito, Buenos Aires, Argentina</address>
             </div>
 
             <div className="row mb-sm-4 mb-md-5">
@@ -28,7 +28,7 @@ function QuienesSomos() {
                   <h4 className="mb-2">Teléfono</h4>
                   <hr className="w-75 mb-3 border-dark-subtle" />
                   <p className="mb-0">
-                    <a className="link-secondary text-decoration-none" href="tel:+541147922430">54 11 4792-2430</a>
+                    <a className="link-secondary text-decoration-none" href="tel:+541147922430">54 11 9247-3024</a>
                   </p>
                 </div>
               </div>
