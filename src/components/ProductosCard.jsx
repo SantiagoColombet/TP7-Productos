@@ -32,12 +32,12 @@ function ProductosCard({ producto }) {
                 <img src={producto.thumbnail} alt={producto.title} className="img-fluid mb-3" />
                 <p>{producto.description}</p>
                 <div className='d-flex flex-row justify-content-between w-10"'>
-                  <p><strong>Precio:</strong> ${producto.price}</p>
+                  <p>Precio: ${producto.price}</p>
                   <p>⭐{producto.rating}</p>
                 </div>
               </div>
               <div className="modal-footer d-flex justify-content-between w-100">
-                <p><strong>{producto.availabilityStatus}</strong></p>
+                <p>{producto.availabilityStatus}</p>
                 <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cerrar</button>
               </div>
             </div>

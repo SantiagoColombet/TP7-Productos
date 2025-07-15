@@ -38,7 +38,7 @@ function ListaProductos() {
   return (
     <>
       <div>
-        <h1><strong>{idCategoria}</strong></h1>
+        <h1 className="text-primary text-center fw-bold mb-4">{idCategoria}</h1>
       </div>    
       <div className="container my-4">
         <div className="row g-4">
