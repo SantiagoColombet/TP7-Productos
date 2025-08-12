@@ -1,8 +1,10 @@
 import Home from '../pages/Home.jsx';
 import ProductoDetalle from '../pages/ProductoDetalle';
+import Carrito from './Carrito.jsx';
 import Productos from '../pages/Productos';
 import QuienesSomos from '../pages/QuienesSomos';
 import Contacto from '../pages/Contacto.jsx';
+import CarritoPage from '../pages/Carrito.jsx';
 import { Routes, Route, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -50,6 +52,7 @@ function NavBar() {
               </li>
             </ul>
           </div>
+          <Carrito></Carrito>
         </div>
       </nav>
       <Routes>
@@ -58,6 +61,7 @@ function NavBar() {
         <Route path="/productos/:idCategoria" element={<Productos />} />
         <Route path="/quienessomos" element={<QuienesSomos />} />
         <Route path="/contacto" element={<Contacto />} />
+        <Route path="/carrito" element={<CarritoPage />} />
       </Routes>
     </>
   );

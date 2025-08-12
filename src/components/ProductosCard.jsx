@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductosCard.css';
+import useCart from '../context/useCart.js';
 
 function ProductosCard({ producto }) {
+  const { addToCart } = useCart();
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,8 +16,11 @@ function ProductosCard({ producto }) {
           <p className="card-text text-truncate">{producto.description}</p>
           <div className="mt-auto">
             <p className="card-text fw-bold">${producto.price}</p>
-            <button className="btn btn-primary w-100" onClick={() => setShowModal(true)}>
+            <button className="btn btn-outline-primary w-100 mb-2" onClick={() => setShowModal(true)}>
               Ver detalle
+            </button>
+            <button className="btn btn-primary w-100" onClick={() => addToCart(producto)}>
+              Agregar al carrito
             </button>
           </div>
         </div>
