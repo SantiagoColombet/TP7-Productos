@@ -1,54 +1,88 @@
-// cartContext.js
-import { createContext, useState, useEffect } from 'react';
+// /src/context/CartContext.js
+import React, { createContext, useState, useEffect } from 'react';
 
-// Crear el contexto
-const CartContext = createContext();
+export const CartContext = createContext();
 
-// Componente proveedor del carrito
-const CarritoProvider = ({ children }) => {
+const CartProvider = ({ children }) => {
   const [itemCarrito, setItemCarrito] = useState(() => {
     const itemsGuardados = localStorage.getItem('itemsGuardados');
     return itemsGuardados ? JSON.parse(itemsGuardados) : [];
   });
 
-  // Agregar producto al carrito
-  const addToCart = (producto) => {
-    setItemCarrito((prevCarrito) => {
-      const nuevoCarrito = [...prevCarrito, producto];
+  // Añade producto: si existe, incrementa quantity; si no, lo agrega con quantity
+  const addToCart = (producto, cantidad = 1) => {
+    setItemCarrito(prev => {
+      const existe = prev.find(p => p.id === producto.id);
+      let nuevoCarrito;
+      if (existe) {
+        nuevoCarrito = prev.map(p =>
+          p.id === producto.id ? { ...p, quantity: p.quantity + cantidad } : p
+        );
+      } else {
+        // guardamos solo los campos necesarios + cantidad por defecto
+        const productoParaGuardar = {
+          id: producto.id,
+          title: producto.title,
+          price: Number(producto.price) || 0,
+          thumbnail: producto.thumbnail,
+          quantity: cantidad,
+        };
+        nuevoCarrito = [...prev, productoParaGuardar];
+      }
       localStorage.setItem('itemsGuardados', JSON.stringify(nuevoCarrito));
       return nuevoCarrito;
     });
   };
 
-  // Limpiar el carrito
+  const removeFromCart = (id) => {
+    setItemCarrito(prev => {
+      const nuevoCarrito = prev.filter(item => item.id !== id);
+      localStorage.setItem('itemsGuardados', JSON.stringify(nuevoCarrito));
+      return nuevoCarrito;
+    });
+  };
+
+  const updateQuantity = (id, quantity) => {
+    setItemCarrito(prev => {
+      let nuevoCarrito = prev.map(item =>
+        item.id === id ? { ...item, quantity: Number(quantity) } : item
+      ).filter(item => item.quantity > 0); // elimina si 0 o menos
+      localStorage.setItem('itemsGuardados', JSON.stringify(nuevoCarrito));
+      return nuevoCarrito;
+    });
+  };
+
   const clearCart = () => {
     setItemCarrito([]);
     localStorage.setItem('itemsGuardados', JSON.stringify([]));
   };
 
-  // Eliminar producto por ID
-  const removeFromCart = (id) => {
-    setItemCarrito((prevCarrito) => {
-      const nuevoCarrito = prevCarrito.filter(item => item.id !== id);
-      localStorage.setItem('itemsGuardados', JSON.stringify(nuevoCarrito));
-      return nuevoCarrito;
-    });
-  };
+  const getItemsCount = () =>
+    itemCarrito.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
-  // Calcular total del carrito
-  const getTotal = itemCarrito.reduce((acc, item) => acc + item.price, 0);
+  const getTotal = () =>
+    itemCarrito.reduce((acc, item) => acc + (item.price || 0) * (item.quantity || 0), 0);
 
-  // Actualizar localStorage cuando cambie el carrito
+  // Mantener localStorage sincronizado (esto duplica la escritura pero es seguro)
   useEffect(() => {
     localStorage.setItem('itemsGuardados', JSON.stringify(itemCarrito));
   }, [itemCarrito]);
 
   return (
-    <CartContext.Provider value={{ itemCarrito, addToCart, clearCart, removeFromCart, getTotal }}>
+    <CartContext.Provider
+      value={{
+        itemCarrito,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        getItemsCount,
+        getTotal,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-export { CartContext };
-export default CarritoProvider;
+export default CartProvider;
