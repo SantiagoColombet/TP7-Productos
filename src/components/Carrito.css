@@ -1,0 +1,31 @@
+.carrito-modal {
+  position: absolute;
+  top: 60px;   
+  right: 15px;        
+  width: 280px;      
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  z-index: 1050;
+}
+
+.carrito-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.carrito-body {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+.carrito-footer {
+  margin-top: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}

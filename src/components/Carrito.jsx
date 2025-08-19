@@ -1,25 +1,66 @@
-import React from 'react';
-import './Carrito.css';
-import { Link } from 'react-router-dom';
-import useCart from '../context/useCart.js';
+import React from "react";
+import { Link } from "react-router-dom";
+import useCart from "../context/useCart";
+import "./Carrito.css";
 
-const Carrito = () => {
-  const { getItemsCount } = useCart();
-  const totalCantidad = typeof getItemsCount === 'function' ? getItemsCount() : 0;
+
+function Carrito({ isOpen, onClose }) {
+  const { itemCarrito, removeFromCart, clearCart, getTotal } = useCart();
+
+  if (!isOpen) return null;
 
   return (
-    <Link to="/carrito" className="position-relative text-decoration-none text-dark">
-      <i className="fas fa-shopping-cart" />
-      {totalCantidad > 0 && (
-        <span
-          className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-          style={{ fontSize: '0.7rem' }}
-        >
-          {totalCantidad}
-        </span>
+    <div className="carrito-modal shadow">
+      <div className="carrito-header">
+        <h6>Tu carrito</h6>
+        <button className="btn-close" onClick={onClose}></button>
+      </div>
+
+      <div className="carrito-body">
+        {itemCarrito.length === 0 ? (
+          <p className="text-muted small">El carrito está vacío.</p>
+        ) : (
+          itemCarrito.map((item) => (
+            <div key={item.id} className="d-flex align-items-center justify-content-between mb-2">
+              <div>
+                <strong>{item.title}</strong>
+                <div className="small text-muted">
+                  {item.quantity} × ${item.price}
+                </div>
+              </div>
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={() => removeFromCart(item.id)}
+              >
+                ×
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+
+      {itemCarrito.length > 0 && (
+        <div className="carrito-footer">
+          <div className="fw-bold mb-2">Total: ${getTotal().toFixed(2)}</div>
+          
+          <button 
+            className="btn btn-outline-secondary btn-sm w-100 mb-2"
+            onClick={clearCart}
+          >
+            Vaciar carrito
+          </button>
+          
+          <Link 
+            to="/carrito"
+            className="btn btn-success btn-sm w-100"
+            onClick={onClose}
+          >
+            Ir a pagar
+          </Link>
+        </div>
       )}
-    </Link>
+    </div>
   );
-};
+}
 
 export default Carrito;

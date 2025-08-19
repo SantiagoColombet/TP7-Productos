@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductosCard.css';
 import useCart from '../context/useCart.js';
@@ -7,9 +7,18 @@ function ProductosCard({ producto }) {
   const { addToCart } = useCart();
   const [showModal, setShowModal] = useState(false);
 
+  const [toast, setToast] = useState({ visible: false, message: '' });
+
   const handleAdd = () => {
-    addToCart(producto, 1); // agregamos 1 unidad
+    addToCart(producto, 1);
+    setToast({ visible: true, message: `${producto.title} agregado al carrito` });
   };
+
+  useEffect(() => {
+    if (!toast.visible) return;
+    const t = setTimeout(() => setToast(prev => ({ ...prev, visible: false })), 3000);
+    return () => clearTimeout(t);
+  }, [toast.visible]);
 
   return (
     <>
@@ -35,7 +44,7 @@ function ProductosCard({ producto }) {
           className="modal d-block"
           tabIndex="-1"
           role="dialog"
-          onClick={() => setShowModal(false)} // backdrop click
+          onClick={() => setShowModal(false)}
         >
           <div className="modal-dialog" role="document" onClick={(e) => e.stopPropagation()}>
             <div className="modal-content">
@@ -62,6 +71,17 @@ function ProductosCard({ producto }) {
           </div>
         </div>
       )}
+
+      <div
+        className={`toast-fixed ${toast.visible ? 'toast-show' : 'toast-hidden'}`}
+        aria-live="polite"
+        aria-atomic="true"
+        role="status"
+      >
+        <div className="toast-body">
+          {toast.message}
+        </div>
+      </div>
     </>
   );
 }

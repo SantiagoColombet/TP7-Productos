@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import ProductosCard from '../components/ProductosCard';
 
 function Home() {
   const [productos, setProductos] = useState([]);
@@ -16,19 +17,16 @@ function Home() {
     <div className="container py-5 text-center">
       <h3 className="mb-4">Productos seleccionados para vos</h3>
       <div className="row g-4 justify-content-center">
-        {productos.map(producto => (
-          <div key={producto.id} className="col-12 col-sm-6 col-md-3">
-            <div className="card h-100 shadow-sm">
-              <img src={producto.thumbnail} className="card-img-top" alt={producto.title} />
-              <div className="card-body d-flex flex-column">
-                <h6 className="card-title text-truncate">{producto.title}</h6>
-                <p className="text-primary fw-bold mt-auto">${producto.price}</p>
+        <div className="container my-4">
+          <div className="row g-4">
+            {productos.map((producto, index) => (
+              <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <ProductosCard producto={producto} />
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
-
+        </div>
+      </div>    
     </div>
   );
 }

@@ -11,10 +11,14 @@ import axios from 'axios';
 import './NavBar.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import useCart from "../context/useCart";
+import "./Carrito.css"; 
 
 function NavBar() {
   const [categorias, setCategorias] = useState([]);
+  const [open, setOpen] = useState(false);
+  const { getItemsCount } = useCart();
+  const count = typeof getItemsCount === "function" ? getItemsCount() : 0;
 
   useEffect(() => {
     axios.get('https://dummyjson.com/products/categories')
@@ -52,7 +56,17 @@ function NavBar() {
               </li>
             </ul>
           </div>
-          <Carrito></Carrito>
+          <button
+            className="header-cart-btn"
+            onClick={() => setOpen(true)}
+            aria-label="Abrir carrito"
+            type="button"
+          >
+            <i className="fas fa-shopping-cart" />
+            {count > 0 && <span className="header-cart-badge">{count}</span>}
+          </button>
+
+          <Carrito isOpen={open} onClose={() => setOpen(false)} />
         </div>
       </nav>
       <Routes>

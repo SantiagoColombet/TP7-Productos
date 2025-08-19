@@ -1,6 +1,5 @@
-// /src/context/useCart.js
-import { useContext } from 'react';
-import { CartContext } from './CartContext'; // <-- ruta consistente y sensible a mayúsculas
+import { useContext } from "react";
+import { CartContext } from "./CartContext"; 
 
 const useCart = () => useContext(CartContext);
 
