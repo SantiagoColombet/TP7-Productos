@@ -43,18 +43,11 @@ function Carrito({ isOpen, onClose }) {
         <div className="carrito-footer">
           <div className="fw-bold mb-2">Total: ${getTotal().toFixed(2)}</div>
           
-          <button 
-            className="btn btn-outline-secondary btn-sm w-100 mb-2"
-            onClick={clearCart}
-          >
+          <button className="btn btn-outline-secondary btn-sm w-100 mb-2" onClick={clearCart} >
             Vaciar carrito
           </button>
           
-          <Link 
-            to="/carrito"
-            className="btn btn-success btn-sm w-100"
-            onClick={onClose}
-          >
+          <Link to="/carrito" className="btn btn-success btn-sm w-100" onClick={onClose}>
             Ir a pagar
           </Link>
         </div>

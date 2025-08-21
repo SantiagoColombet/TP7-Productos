@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
@@ -40,7 +41,7 @@ const CartProvider = ({ children }) => {
   const updateQuantity = (id, quantity) => {
     setItemCarrito(prev => {
       let nuevoCarrito = prev.map(item =>
-        item.id === id ? { ...item, quantity: Number(quantity) } : item
+        item.id === id ? { ...item, quantity: quantity } : item
       ).filter(item => item.quantity > 0); 
       return nuevoCarrito;
     });

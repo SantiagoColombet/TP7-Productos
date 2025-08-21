@@ -1,11 +1,5 @@
-import Home from '../pages/Home.jsx';
-import ProductoDetalle from '../pages/ProductoDetalle';
 import Carrito from './Carrito.jsx';
-import Productos from '../pages/Productos';
-import QuienesSomos from '../pages/QuienesSomos';
-import Contacto from '../pages/Contacto.jsx';
-import CarritoPage from '../pages/Carrito.jsx';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NavBar.css'
@@ -40,7 +34,7 @@ function NavBar() {
                 <Link className="nav-link" to="/quienessomos">Quienes Somos</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contacto">Contacto</Link>
+                <Link className="nav-link" to="/contactos">Contacto</Link>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,12 +50,7 @@ function NavBar() {
               </li>
             </ul>
           </div>
-          <button
-            className="header-cart-btn"
-            onClick={() => setOpen(true)}
-            aria-label="Abrir carrito"
-            type="button"
-          >
+          <button className="header-cart-btn" onClick={() => setOpen(true)} type="button">
             <i className="fas fa-shopping-cart" />
             {count > 0 && <span className="header-cart-badge">{count}</span>}
           </button>
@@ -69,14 +58,6 @@ function NavBar() {
           <Carrito isOpen={open} onClose={() => setOpen(false)} />
         </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/productodetalle/:idProducto" element={<ProductoDetalle />} />
-        <Route path="/productos/:idCategoria" element={<Productos />} />
-        <Route path="/quienessomos" element={<QuienesSomos />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/carrito" element={<CarritoPage />} />
-      </Routes>
     </>
   );
 }
