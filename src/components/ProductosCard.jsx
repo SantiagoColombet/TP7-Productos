@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductosCard.css';
 import useCart from '../context/useCart.js';
+import PropTypes from 'prop-types';
 
 function ProductosCard({ producto }) {
   const { addToCart } = useCart();
@@ -85,5 +86,16 @@ function ProductosCard({ producto }) {
     </>
   );
 }
+ProductosCard.propTypes = {
+  producto: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number,
+    availabilityStatus: PropTypes.string,
+  }).isRequired,
+};
 
 export default ProductosCard;
