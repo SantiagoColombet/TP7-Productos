@@ -1,7 +1,7 @@
 import Home from '../pages/Home.jsx';
-import ProductoDetalle from '../pages/ProductoDetalle';
-import Productos from '../pages/Productos';
-import QuienesSomos from '../pages/QuienesSomos';
+import ProductoDetalle from '../pages/ProductoDetalle.jsx';
+import Productos from '../pages/Productos.jsx';
+import QuienesSomos from '../pages/QuienesSomos.jsx';
 import Contacto from '../pages/Contacto.jsx';
 import { Routes, Route, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
@@ -9,11 +9,19 @@ import axios from 'axios';
 import './NavBar.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as z from "zod";
 
+const CategoriasEsquema = z.object({
+  name: z.string(),
+  slug: z.string(),
+  url: z.string()
+});
 
+const Categorias = z.array(CategoriasEsquema)
+
+type Categoria = z.infer<typeof Categorias>
 function NavBar() {
-  const [categorias, setCategorias] = useState([]);
-
+  const [categorias, setCategorias] = useState<Categoria>([]);
   useEffect(() => {
     axios.get('https://dummyjson.com/products/categories')
       .then(response => setCategorias(response.data))

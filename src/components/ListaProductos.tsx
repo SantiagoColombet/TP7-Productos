@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import ProductosCard from './ProductosCard.jsx';
+import ProductosCard from './ProductosCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 
+type Producto = {
+  thumbnail: string;
+  title: string;
+  description: string;
+  price: number;
+  rating: number;
+  availabilityStatus?: string;
+};
+
 function ListaProductos() {
-  const { idCategoria } = useParams();
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { idCategoria } = useParams<{ idCategoria?: string }>(); 
+  const [productos, setProductos] = useState<Producto[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
     setError(null);
 
-    let url = 'https://dummyjson.com/products/'; 
+    let url = 'https://dummyjson.com/products/';
 
     if (idCategoria && idCategoria !== 'all') {
       url = `https://dummyjson.com/products/category/${idCategoria}`;
     }
 
     axios.get(url)
-    .then(response => {
-      setProductos(response.data.products);
-      setLoading(false);
-    })
-    .catch(error => {
-      setError(error.message);
-      setLoading(false);
-    });
+      .then(response => {
+        setProductos(response.data.products); 
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
 
   }, [idCategoria]);
 
@@ -39,7 +48,7 @@ function ListaProductos() {
     <>
       <div>
         <h1 className="text-primary text-center fw-bold mb-4">{idCategoria}</h1>
-      </div>    
+      </div>
       <div className="container my-4">
         <div className="row g-4">
           {productos.map((producto, index) => (
