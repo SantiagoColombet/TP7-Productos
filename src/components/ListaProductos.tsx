@@ -3,16 +3,11 @@ import ProductosCard from './ProductosCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { Producto } from '../types/Producto.ts'; 
 
-type Producto = {
-  thumbnail: string;
-  title: string;
-  description: string;
-  price: number;
-  rating: number;
-  availabilityStatus?: string;
+type Props = {
+  listaProductos?: Producto[];
 };
-
 function ListaProductos() {
   const { idCategoria } = useParams<{ idCategoria?: string }>(); 
   const [productos, setProductos] = useState<Producto[]>([]);
