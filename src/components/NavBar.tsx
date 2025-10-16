@@ -1,8 +1,8 @@
-import Home from '../pages/Home.jsx';
-import ProductoDetalle from '../pages/ProductoDetalle.jsx';
-import Productos from '../pages/Productos.jsx';
-import QuienesSomos from '../pages/QuienesSomos.jsx';
-import Contacto from '../pages/Contacto.jsx';
+import Home from '../pages/Home';
+import ProductoDetalle from '../pages/ProductoDetalle';
+import Productos from '../pages/Productos';
+import QuienesSomos from '../pages/QuienesSomos';
+import Contacto from '../pages/Contacto';
 import { Routes, Route, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -17,15 +17,20 @@ const CategoriasEsquema = z.object({
   url: z.string()
 });
 
-const Categorias = z.array(CategoriasEsquema)
-
-type Categoria = z.infer<typeof Categorias>
+const Categorias = z.array(CategoriasEsquema);
+type CategoriaItem = z.infer<typeof CategoriasEsquema>;
 function NavBar() {
-  const [categorias, setCategorias] = useState<Categoria>([]);
+  const [categorias, setCategorias] = useState<CategoriaItem[]>([]);
   useEffect(() => {
-    axios.get('https://dummyjson.com/products/categories')
-      .then(response => setCategorias(response.data))
-      .catch(error => console.error("Error al obtener las categorías:", error));
+    axios
+      .get('https://dummyjson.com/products/categories')
+      .then(({ data }) => {
+        const parsed = Categorias.parse(data);
+        setCategorias(parsed);
+      })
+      .catch((error: unknown) => {
+        console.error("Error al obtener las categorías:", error);
+      });
   }, []);
 
   return (

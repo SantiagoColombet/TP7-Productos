@@ -3,7 +3,7 @@ import ProductosCard from './ProductosCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { Producto } from '../types/Producto.ts'; 
+import { Producto } from '../../types/Producto'; 
 
 type Props = {
   listaProductos?: Producto[];
@@ -46,8 +46,8 @@ function ListaProductos() {
       </div>
       <div className="container my-4">
         <div className="row g-4">
-          {productos.map((producto, index) => (
-            <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
+          {productos.map((producto) => (
+            <div key={producto.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
               <ProductosCard producto={producto} />
             </div>
           ))}

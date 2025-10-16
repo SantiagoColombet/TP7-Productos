@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Productos.css'
-import ListaProductos from '../components/ListaProductos.js'
-import { Producto } from '../types/Producto'; 
+import ListaProductos from '../components/ListaProductos'
+import { Producto } from '../../types/Producto'; 
 
 type Props = {
   listaProductos?: Producto[]; 
@@ -24,7 +24,7 @@ function Productos() {
 
   return (
     <div className='container'>
-      <ListaProductos listaProductos={listaProductos} />
+      <ListaProductos  />
     </div>
   )
 }

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductosCard.css';
+import { Producto } from '../../types/Producto';
 
-function ProductosCard({ producto }) {
+type Props = { producto: Producto }
+function ProductosCard({ producto }: Props) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -21,7 +23,7 @@ function ProductosCard({ producto }) {
         </div>
       </div>
       {showModal && (
-        <div className="modal d-block" tabIndex="-1" role="dialog" onClick={() => setShowModal(false)}>
+        <div className="modal d-block" tabIndex={-1} role="dialog" onClick={() => setShowModal(false)}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">

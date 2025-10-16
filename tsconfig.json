@@ -5,16 +5,16 @@
   "jsx": "react-jsx", 
   "module": "ESNext", 
   "moduleResolution": "Bundler", 
-  "strict": true, // Fuerza reglas de tipado estricto 
-  "noUncheckedIndexedAccess": true, // Mejora la seguridad con arrays y objetos 
+  "strict": true, 
+  "noUncheckedIndexedAccess": true, 
   "noImplicitAny": true, 
   "esModuleInterop": true, 
   "skipLibCheck": true, 
   "forceConsistentCasingInFileNames": true, 
-  "allowJs": true, // Permite coexistencia con JS para migración gradual 
+  "allowJs": true, 
   "checkJs": false, 
   "resolveJsonModule": true, 
-  "isolatedModules": true }, 
-  "include": ["src"] 
+  "isolatedModules": true,
+  "noEmit": true }, 
+  "include": ["src", "types", "main.jsx"]
 }
-  

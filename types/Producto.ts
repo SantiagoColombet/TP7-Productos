@@ -1,4 +1,5 @@
 export type Producto = {
+    id: number;
     thumbnail: string;
     title: string;
     description: string;
@@ -6,4 +7,3 @@ export type Producto = {
     rating: number;
     availabilityStatus?: string;
   };
-  
