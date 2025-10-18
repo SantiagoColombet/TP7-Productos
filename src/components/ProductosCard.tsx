@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductosCard.css';
-import useCart from '../context/useCart.js';
-import PropTypes from 'prop-types';
+import useCart from '../context/useCart';
+import type { Producto } from '../types';
 
-function ProductosCard({ producto }) {
+type Props = { producto: Producto };
+function ProductosCard({ producto }: Props) {
   const { addToCart } = useCart();
   const [showModal, setShowModal] = useState(false);
 
-  const [toast, setToast] = useState({ visible: false, message: '' });
+  const [toast, setToast] = useState<{ visible: boolean; message: string }>({ visible: false, message: '' });
 
   const handleAdd = () => {
     addToCart(producto, 1);
@@ -43,11 +44,11 @@ function ProductosCard({ producto }) {
       {showModal && (
         <div
           className="modal d-block"
-          tabIndex="-1"
+          tabIndex={-1}
           role="dialog"
           onClick={() => setShowModal(false)}
         >
-          <div className="modal-dialog" role="document" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-dialog" role="document" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{producto.title}</h5>
@@ -86,16 +87,5 @@ function ProductosCard({ producto }) {
     </>
   );
 }
-ProductosCard.propTypes = {
-  producto: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number,
-    availabilityStatus: PropTypes.string,
-  }).isRequired,
-};
 
 export default ProductosCard;

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Productos.css'
-import ListaProductos from '../components/ListaProductos.jsx'
+import ListaProductos from '../components/ListaProductos'
 
 function Productos() {
-  const [listaProductos, setListaProductos] = useState([])
+  const [listaProductos, setListaProductos] = useState<any[]>([])
 
   useEffect(() => {
     axios.get('https://fakestoreapi.com/products')

@@ -1,4 +1,4 @@
-import Carrito from './Carrito.jsx';
+import Carrito from './Carrito';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -7,9 +7,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useCart from "../context/useCart";
 import "./Carrito.css"; 
+import type { Categoria } from '../types';
 
 function NavBar() {
-  const [categorias, setCategorias] = useState([]);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [open, setOpen] = useState(false);
   const { getItemsCount } = useCart();
   const count = typeof getItemsCount === "function" ? getItemsCount() : 0;

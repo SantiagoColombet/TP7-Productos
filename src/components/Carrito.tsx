@@ -2,10 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useCart from "../context/useCart";
 import "./Carrito.css";
-import PropTypes from "prop-types"; 
+type Props = { isOpen: boolean; onClose: () => void };
 
-
-function Carrito({ isOpen, onClose }) {
+function Carrito({ isOpen, onClose }: Props) {
   const { itemCarrito, removeFromCart, clearCart, getTotal } = useCart();
 
   if (!isOpen) return null;
@@ -56,11 +55,5 @@ function Carrito({ isOpen, onClose }) {
     </div>
   );
 }
-
-Carrito.propTypes = {
-  isOpen: PropTypes.bool.isRequired,          
-  onClose: PropTypes.func.isRequired,       
-};
-
 
 export default Carrito;

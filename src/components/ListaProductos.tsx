@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ProductosCard from './ProductosCard.jsx';
+import ProductosCard from './ProductosCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import type { Producto } from '../types';
 
-function ListaProductos() {
-  const { idCategoria } = useParams();
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+type Props = { listaProductos?: Producto[] };
+function ListaProductos({ listaProductos }: Props) {
+  const { idCategoria } = useParams<{ idCategoria?: string }>();
+  const [productos, setProductos] = useState<Producto[]>(listaProductos ?? []);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -22,7 +24,7 @@ function ListaProductos() {
 
     axios.get(url)
     .then(response => {
-      setProductos(response.data.products);
+      setProductos(response.data.products as Producto[]);
       setLoading(false);
     })
     .catch(error => {

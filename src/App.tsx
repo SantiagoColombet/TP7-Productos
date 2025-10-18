@@ -1,12 +1,12 @@
 import './App.css';
 import MainLayout from './layouts/MainLayout';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home.jsx';
+import Home from './pages/Home';
 import ProductoDetalle from './pages/ProductoDetalle';
 import Productos from './pages/Productos';
 import QuienesSomos from './pages/QuienesSomos';
-import Contacto from './pages/Contacto.jsx';
-import CarritoPage from './pages/Carrito.jsx';
+import Contacto from './pages/Contacto';
+import CarritoPage from './pages/Carrito';
 
 
 function App() {
