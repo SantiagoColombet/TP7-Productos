@@ -16,5 +16,5 @@
   "resolveJsonModule": true, 
   "isolatedModules": true,
   "noEmit": true }, 
-  "include": ["src", "types", "main.jsx"]
+  "include": ["src", "types", "src/main.jsx"]
 }

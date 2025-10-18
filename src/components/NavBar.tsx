@@ -1,9 +1,4 @@
-import Home from '../pages/Home';
-import ProductoDetalle from '../pages/ProductoDetalle';
-import Productos from '../pages/Productos';
-import QuienesSomos from '../pages/QuienesSomos';
-import Contacto from '../pages/Contacto';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NavBar.css'
@@ -65,13 +60,6 @@ function NavBar() {
           </div>
         </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/productodetalle/:idProducto" element={<ProductoDetalle />} />
-        <Route path="/productos/:idCategoria" element={<Productos />} />
-        <Route path="/quienessomos" element={<QuienesSomos />} />
-        <Route path="/contacto" element={<Contacto />} />
-      </Routes>
     </>
   );
 }

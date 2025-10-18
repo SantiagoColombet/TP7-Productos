@@ -8,8 +8,7 @@ function Home() {
 
   useEffect(() => {
     type ProductsResponse = { products: Producto[] }
-    axios
-      .get<ProductsResponse>('https://dummyjson.com/products?limit=4')
+    axios.get<ProductsResponse>('https://dummyjson.com/products?limit=4')
       .then(({ data }) => setProductos(data.products))
       .catch((error) => console.error(error))
   }, [])
